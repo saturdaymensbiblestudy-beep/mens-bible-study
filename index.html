@@ -183,6 +183,29 @@
 
     .hero-details .zoom-note { color: var(--gold-light); }
 
+    .countdown-box {
+      margin-top: 22px;
+      display: inline-block;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 20px;
+      padding: 14px 18px;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.10);
+    }
+
+    .countdown-label {
+      font: 700 11px/1.4 Arial, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--gold-light);
+      margin-bottom: 6px;
+    }
+
+    .countdown-time {
+      font: 700 22px/1.35 Arial, sans-serif;
+      color: white;
+    }
+
     .button-row {
       margin-top: 30px;
       display: flex;
@@ -559,6 +582,14 @@
       <div class="hero-card">
         <div class="eyebrow">Menlo Church • Menlo Park</div>
         <h1>Saturday Morning Men’s Bible Study</h1>
+        <div style="margin-top:10px;font:600 18px/1.6 Arial, sans-serif;color:rgba(255,255,255,0.92);">
+          Menlo Church<br>
+          950 Santa Cruz Ave<br>
+          Menlo Park, CA 94025
+        </div>
+        <div style="margin-top:8px;font:600 16px/1.6 Arial, sans-serif;color:var(--gold-light);letter-spacing:0.04em;">
+          Serving men in Menlo Park since 1966
+        </div>
         <div class="hero-tagline">A place for men who are not afraid to ask difficult questions about faith, Scripture, and life.</div>
         <div class="hero-details">
           <div>Saturdays at 8:00 AM</div>
@@ -566,6 +597,10 @@
           <div class="zoom-note">Also available nationwide via Zoom</div>
           <div>Zoom ID: 472 427 166</div>
           <div>Meeting Name: Saturday Men’s Bible Study</div>
+        </div>
+        <div class="countdown-box">
+          <div class="countdown-label">Next Study Begins In</div>
+          <div id="countdown" class="countdown-time">Calculating…</div>
         </div>
         <div class="button-row">
           <a class="btn btn-secondary" href="https://zoom.us/j/472427166" target="_blank" rel="noopener noreferrer">Join Zoom Meeting</a>
@@ -611,7 +646,7 @@
       <div>
         <div class="section-kicker">About the Group</div>
         <h2 class="section-title" style="text-align:left;">A welcoming Saturday gathering for men</h2>
-        <p class="body-copy">Men from many backgrounds gather each Saturday morning for thoughtful discussion of the Bible, prayer for one another, and friendship rooted in faith. Each week a knowledgeable speaker leads a conversation on a passage of Scripture or a topic relevant to living faithfully today.</p>
+        <p class="body-copy">Men from many backgrounds gather each Saturday morning for thoughtful discussion of the Bible, prayer for one another, and friendship rooted in faith. The group began in 1966 and has been meeting faithfully for nearly six decades, creating a long tradition of thoughtful conversation, encouragement, and Christian fellowship in the Menlo Park community. Each week a knowledgeable speaker leads a conversation on a passage of Scripture or a topic relevant to living faithfully today.</p>
         <div class="feature-list">
           <div class="feature-pill">Open and respectful discussion</div>
           <div class="feature-pill">Insightful weekly speakers</div>
@@ -915,5 +950,32 @@
       <div class="footer-tag">Faith • Wisdom • Fellowship</div>
     </div>
   </footer>
+  <script>
+    function updateCountdown() {
+      const now = new Date();
+      const next = new Date(now);
+      next.setHours(8, 0, 0, 0);
+      const daysUntilSaturday = (6 - now.getDay() + 7) % 7;
+      next.setDate(now.getDate() + daysUntilSaturday);
+
+      if (daysUntilSaturday === 0 && now >= next) {
+        next.setDate(next.getDate() + 7);
+      }
+
+      const diff = next - now;
+      const countdownEl = document.getElementById('countdown');
+      if (!countdownEl) return;
+
+      const totalSeconds = Math.max(0, Math.floor(diff / 1000));
+      const days = Math.floor(totalSeconds / 86400);
+      const hours = Math.floor((totalSeconds % 86400) / 3600);
+      const minutes = Math.floor((totalSeconds % 3600) / 60);
+
+      countdownEl.textContent = `${days} day${days !== 1 ? 's' : ''} ${hours} hour${hours !== 1 ? 's' : ''} ${minutes} minute${minutes !== 1 ? 's' : ''}`;
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 60000);
+  </script>
 </body>
 </html>
