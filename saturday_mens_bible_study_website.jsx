@@ -1,639 +1,878 @@
-export default function SaturdayMensBibleStudyWebsite() {
-  const siteContent = {
-    contact: {
-      prayerEmail: "saturdaymensbiblestudy@gmail.com",
-      generalEmail: "saturdaymensbiblestudy@gmail.com",
-      adminEmail: "saturdaymensbiblestudy@gmail.com",
-    },
-    weeklyTopic: {
-      date: "Saturday, March 14",
-      speaker: "Guest Speaker",
-      title: "What Does It Mean to Understand God’s Will?",
-      summary:
-        "Saturday morning discussion led by a knowledgeable speaker, followed by open conversation and prayer.",
-      scriptures: ["Romans 12:2", "Ephesians 5:15–17"],
-      questionOfTheWeek: "If God is sovereign, how do we understand human freedom?",
-      discussionQuestions: [
-        "Can anyone truly know God’s will?",
-        "What role does wisdom play in discernment?",
-        "How do we distinguish God’s will from our own desires?",
-        "What does faithful obedience look like in ordinary life?",
-      ],
-    },
-    pastTalks: [
-      { date: "Feb 28", title: "Faith and Doubt" },
-      { date: "Feb 21", title: "What Is Biblical Justice?" },
-      { date: "Feb 14", title: "Living With Integrity" },
-      { date: "Feb 7", title: "Suffering, Prayer, and Hope" },
-      { date: "Jan 31", title: "Understanding God’s Will" },
-      { date: "Jan 24", title: "Grace, Truth, and Humility" },
-    ],
-    adminNotes: [
-      "Update the date for the upcoming Saturday.",
-      "Enter the speaker’s name.",
-      "Update the weekly topic title and short summary.",
-      "Replace the scripture references for the current speaker.",
-      "Change the Question of the Week.",
-      "Update the four discussion questions.",
-      "Move last week’s topic into Past Talks.",
-    ],
-  };
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Saturday Morning Men's Bible Study</title>
+  <style>
+    :root {
+      --navy: #1F3A5F;
+      --gold: #C8A24A;
+      --gold-light: #E5D39C;
+      --bg: #F3F1EC;
+      --card: #FFFFFF;
+      --muted: #F8F6F0;
+      --text: #333333;
+      --soft: #666666;
+      --border: #E7E2D8;
+      --shadow: 0 14px 40px rgba(31, 58, 95, 0.12);
+      --radius: 24px;
+      --max: 1180px;
+    }
 
-  const navItems = [
-    "Home",
-    "About",
-    "Weekly Meeting",
-    "This Week's Topic",
-    "Past Talks",
-    "Questions",
-    "Prayer Requests",
-    "Resources",
-    "Photos",
-    "Contact",
-  ];
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
 
-  const questions = [
-    "What does the Bible really say about forgiveness?",
-    "Why does God allow suffering?",
-    "What does it mean to live a life of faith today?",
-    "How do we know God's will?",
-    "What does the Bible say about justice?",
-    "What is true wisdom?",
-    "How should Christians treat those who disagree with them?",
-    "What does the Bible teach about integrity?",
-  ];
+    img { max-width: 100%; display: block; }
+    a { color: inherit; }
 
-  const resources = [
-    { name: "Bible Gateway", desc: "Online Bible translations and search tools" },
-    { name: "Blue Letter Bible", desc: "Study resources, commentaries, and concordances" },
-    { name: "Menlo Church", desc: "Church information and ministries" },
-    { name: "Recommended Books", desc: "Books for deeper reflection and discussion" },
-  ];
+    .top-banner {
+      background: var(--gold);
+      color: var(--navy);
+      text-align: center;
+      padding: 10px 16px;
+      font: 700 14px/1.4 Arial, sans-serif;
+    }
 
-  const photoCards = [
-    "Men sharing coffee and conversation before the study begins",
-    "A thoughtful Saturday morning discussion around Scripture",
-    "Prayer for those facing difficult times",
-    "Warm fellowship and friendship at Menlo Church",
-  ];
+    .top-banner a {
+      font-weight: 800;
+      text-decoration: underline;
+    }
 
-  return (
-    <div className="min-h-screen bg-[#F3F1EC] text-[#333333] scroll-smooth">
-      <div className="w-full bg-[#C8A24A] py-2 text-center text-sm font-semibold text-[#1F3A5F]">
-        Next Study: Saturday • 8:00 AM Pacific • Join in person at Menlo Church or online via Zoom —{" "}
-        <a
-          href="https://zoom.us/j/472427166"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="ml-1 font-bold underline"
-        >
-          Join Zoom
-        </a>
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(31, 58, 95, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .container {
+      width: min(var(--max), calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      padding: 18px 0;
+    }
+
+    .brand-title {
+      color: white;
+      font-size: 30px;
+      font-weight: 700;
+      line-height: 1.1;
+    }
+
+    .brand-subtitle {
+      color: var(--gold-light);
+      font: 600 13px/1.3 Arial, sans-serif;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-top: 6px;
+    }
+
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 14px;
+      font: 600 13px/1.3 Arial, sans-serif;
+    }
+
+    .nav a {
+      color: rgba(255,255,255,0.92);
+      text-decoration: none;
+    }
+
+    .nav a:hover { color: var(--gold-light); }
+
+    .hero {
+      position: relative;
+      background:
+        linear-gradient(rgba(31,58,95,0.62), rgba(31,58,95,0.62)),
+        url('https://images.unsplash.com/photo-1504052434569-70ad5836ab65?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+      color: white;
+    }
+
+    .hero-inner {
+      padding: 110px 0 130px;
+    }
+
+    .hero-card {
+      max-width: 760px;
+      background: rgba(0,0,0,0.10);
+      border: 1px solid rgba(255,255,255,0.15);
+      backdrop-filter: blur(8px);
+      border-radius: 28px;
+      padding: 34px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.18);
+    }
+
+    .eyebrow {
+      font: 700 12px/1.4 Arial, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.24em;
+      color: var(--gold-light);
+      margin-bottom: 18px;
+    }
+
+    h1, h2, h3, h4 { margin: 0; line-height: 1.15; color: var(--navy); }
+    .hero h1 { color: white; font-size: clamp(40px, 6vw, 68px); }
+    .hero-tagline {
+      margin-top: 22px;
+      font-size: clamp(24px, 3vw, 34px);
+      font-style: italic;
+      color: rgba(255,255,255,0.96);
+    }
+
+    .hero-details {
+      margin-top: 22px;
+      font-size: 21px;
+      color: rgba(255,255,255,0.92);
+    }
+
+    .hero-details .zoom-note { color: var(--gold-light); }
+
+    .button-row {
+      margin-top: 30px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .btn {
+      display: inline-block;
+      text-decoration: none;
+      border-radius: 18px;
+      padding: 14px 22px;
+      font: 700 16px/1.2 Arial, sans-serif;
+      transition: transform 0.15s ease, opacity 0.15s ease;
+    }
+
+    .btn:hover { transform: translateY(-1px); opacity: 0.96; }
+    .btn-primary { background: var(--gold); color: var(--navy); }
+    .btn-secondary { background: white; color: var(--navy); }
+    .btn-outline { border: 1px solid rgba(255,255,255,0.45); color: white; }
+
+    .section { padding: 84px 0; }
+    .section-white { background: white; }
+    .section-title-wrap { text-align: center; margin-bottom: 40px; }
+    .section-kicker {
+      font: 700 12px/1.4 Arial, sans-serif;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+    .section-title { font-size: clamp(34px, 4vw, 50px); }
+    .section-subtitle { font: 400 18px/1.8 Arial, sans-serif; color: var(--soft); margin-top: 14px; }
+
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .card-muted {
+      background: var(--muted);
+      border: 1px solid var(--border);
+      box-shadow: none;
+    }
+
+    .card h3 { font-size: 30px; }
+    .body-copy, .card p, li, .detail-text, input, textarea, button {
+      font-family: Arial, sans-serif;
+    }
+
+    .body-copy {
+      font-size: 18px;
+      line-height: 1.85;
+      color: #444;
+    }
+
+    .quote-section {
+      background:
+        linear-gradient(rgba(31,58,95,0.72), rgba(31,58,95,0.72)),
+        url('https://images.unsplash.com/photo-1504052434569-70ad5836ab65?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+      color: white;
+      text-align: center;
+    }
+
+    .quote-text {
+      font-size: clamp(30px, 4vw, 48px);
+      font-style: italic;
+      max-width: 980px;
+      margin: 0 auto;
+      line-height: 1.45;
+    }
+
+    .quote-ref {
+      margin-top: 18px;
+      font: 600 20px/1.5 Arial, sans-serif;
+      color: var(--gold-light);
+    }
+
+    .about-grid { display: grid; grid-template-columns: 1.08fr 0.92fr; gap: 36px; align-items: center; }
+    .feature-list { display: grid; grid-template-columns: repeat(2,1fr); gap: 14px; margin-top: 28px; }
+    .feature-pill {
+      background: white;
+      border-radius: 18px;
+      padding: 16px 18px;
+      box-shadow: 0 10px 24px rgba(31,58,95,0.08);
+      font: 600 16px/1.5 Arial, sans-serif;
+      color: var(--navy);
+    }
+
+    .image-card {
+      overflow: hidden;
+      border-radius: 34px;
+      box-shadow: 0 18px 44px rgba(31,58,95,0.16);
+    }
+
+    .schedule-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 30px; }
+    .schedule-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px 0;
+      border-bottom: 1px solid #ddd;
+      font: 400 18px/1.6 Arial, sans-serif;
+      color: #444;
+    }
+    .schedule-row:last-child { border-bottom: 0; }
+    .schedule-row strong { color: var(--navy); }
+
+    .navy-card {
+      background: var(--navy);
+      color: white;
+      border-radius: 32px;
+      padding: 30px;
+      box-shadow: 0 18px 44px rgba(31,58,95,0.16);
+    }
+
+    .navy-card h3 { color: white; font-size: 34px; }
+    .mini-panel {
+      margin-top: 24px;
+      background: rgba(255,255,255,0.10);
+      border-radius: 22px;
+      padding: 20px;
+    }
+    .mini-label {
+      font: 700 11px/1.4 Arial, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--gold-light);
+      margin-bottom: 8px;
+    }
+    .mini-panel p { margin: 0; font: 400 18px/1.7 Arial, sans-serif; color: rgba(255,255,255,0.9); }
+
+    .topic-card {
+      background: var(--navy);
+      color: white;
+      border-radius: 34px;
+      padding: 34px;
+      box-shadow: 0 20px 50px rgba(31,58,95,0.16);
+    }
+    .topic-card h2, .topic-card h3 { color: white; }
+    .topic-admin {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 28px;
+      padding: 24px;
+      margin-bottom: 26px;
+    }
+    .topic-admin-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
+    .topic-admin-note {
+      background: rgba(0,0,0,0.12);
+      border-radius: 18px;
+      padding: 10px 14px;
+      font: 600 14px/1.5 Arial, sans-serif;
+      color: rgba(255,255,255,0.9);
+      white-space: nowrap;
+    }
+    .topic-admin-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+    .topic-admin-item {
+      background: rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 16px;
+    }
+    .topic-admin-item.wide-2 { grid-column: span 2; }
+    .topic-admin-item.wide-3 { grid-column: span 3; }
+    .topic-admin-item div:first-child {
+      font: 700 11px/1.4 Arial, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--gold-light);
+      margin-bottom: 10px;
+    }
+    .topic-admin-item div:last-child,
+    .topic-admin-item ul {
+      font: 400 15px/1.7 Arial, sans-serif;
+      color: rgba(255,255,255,0.92);
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .topic-main-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 24px; }
+    .topic-badges { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; }
+    .badge {
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.10);
+      font: 600 13px/1.4 Arial, sans-serif;
+      color: rgba(255,255,255,0.86);
+    }
+    .topic-box-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 16px; margin-top: 24px; }
+    .topic-box {
+      background: rgba(255,255,255,0.10);
+      border-radius: 20px;
+      padding: 18px;
+    }
+    .topic-box-title {
+      font: 700 11px/1.4 Arial, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--gold-light);
+      margin-bottom: 10px;
+    }
+    .topic-box div, .topic-box p { font: 400 18px/1.7 Arial, sans-serif; color: rgba(255,255,255,0.94); margin: 0; }
+
+    .white-topic-panel {
+      background: white;
+      color: var(--text);
+      border-radius: 28px;
+      padding: 26px;
+    }
+    .white-topic-panel h3 { color: var(--navy); font-size: 32px; }
+    .white-topic-panel ul { margin: 18px 0 0; padding-left: 22px; }
+    .white-topic-panel li { font-size: 17px; line-height: 1.75; margin-bottom: 10px; }
+
+    .note-grid .card p { color: var(--navy); font-size: 17px; line-height: 1.8; }
+    .archive-grid .card .date {
+      font: 700 12px/1.4 Arial, sans-serif;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+    .archive-grid .card h3 { font-size: 30px; }
+
+    .questions-grid .card { padding: 24px; }
+    .questions-grid .card p { font-size: 20px; line-height: 1.7; color: var(--navy); margin: 0; }
+
+    .prayer-grid { display: grid; grid-template-columns: 1fr 0.95fr; gap: 24px; }
+    .prayer-card {
+      background: var(--navy);
+      color: white;
+      border-radius: 34px;
+      padding: 34px;
+      box-shadow: 0 20px 50px rgba(31,58,95,0.16);
+    }
+    .prayer-card h2 { color: white; }
+    .form-card {
+      background: white;
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: 0 16px 40px rgba(31,58,95,0.12);
+    }
+    input, textarea {
+      width: 100%;
+      border: 1px solid #ddd;
+      border-radius: 18px;
+      padding: 14px 16px;
+      font-size: 16px;
+      color: var(--text);
+      margin-bottom: 14px;
+      background: white;
+    }
+    textarea { min-height: 140px; resize: vertical; }
+    .form-row { display: grid; grid-template-columns: repeat(2,1fr); gap: 14px; }
+    .help-text {
+      font: 400 14px/1.7 Arial, sans-serif;
+      color: var(--soft);
+      margin-top: 12px;
+    }
+
+    .resource-card h3 { font-size: 28px; margin-bottom: 10px; }
+    .resource-card p { margin: 0; font-size: 16px; line-height: 1.8; color: #444; }
+    .resource-card a { text-decoration: none; }
+    .resource-card a:hover h3 { text-decoration: underline; }
+
+    .photo-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 22px; }
+    .photo-card {
+      overflow: hidden;
+      background: var(--muted);
+      border-radius: 30px;
+      box-shadow: 0 16px 40px rgba(31,58,95,0.12);
+    }
+    .photo-card img { height: 220px; width: 100%; object-fit: cover; }
+    .photo-card .caption {
+      padding: 18px;
+      color: var(--navy);
+      font: 400 16px/1.7 Arial, sans-serif;
+    }
+
+    .contact-grid { display: grid; grid-template-columns: 0.95fr 1.05fr; gap: 24px; }
+    .contact-card {
+      background: var(--navy);
+      color: white;
+      border-radius: 34px;
+      padding: 34px;
+      box-shadow: 0 20px 50px rgba(31,58,95,0.16);
+    }
+    .contact-card h2 { color: white; }
+    .contact-card a { text-decoration: underline; }
+
+    .footer {
+      background: var(--navy);
+      color: white;
+      padding: 34px 0;
+    }
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .footer-title { font-size: 30px; }
+    .footer-copy {
+      font: 400 15px/1.6 Arial, sans-serif;
+      color: rgba(255,255,255,0.76);
+      margin-top: 4px;
+    }
+    .footer-tag { color: var(--gold-light); font: 700 12px/1.4 Arial, sans-serif; letter-spacing: 0.2em; text-transform: uppercase; }
+
+    @media (max-width: 1100px) {
+      .grid-4, .photo-grid { grid-template-columns: repeat(2,1fr); }
+      .about-grid, .schedule-grid, .topic-main-grid, .prayer-grid, .contact-grid { grid-template-columns: 1fr; }
+      .topic-admin-grid { grid-template-columns: repeat(2,1fr); }
+      .topic-admin-item.wide-3 { grid-column: span 2; }
+      .nav { display: none; }
+    }
+
+    @media (max-width: 760px) {
+      .header-inner { padding: 14px 0; }
+      .brand-title, .footer-title { font-size: 24px; }
+      .hero-inner { padding: 70px 0 86px; }
+      .hero-card, .topic-card, .prayer-card, .contact-card, .navy-card { padding: 24px; }
+      .section { padding: 64px 0; }
+      .grid-3, .grid-2, .grid-4, .feature-list, .topic-box-grid, .topic-admin-grid, .form-row, .photo-grid { grid-template-columns: 1fr; }
+      .topic-admin-item.wide-2, .topic-admin-item.wide-3 { grid-column: span 1; }
+      .topic-admin-top, .footer-inner { display: block; }
+      .topic-admin-note { margin-top: 12px; white-space: normal; }
+      .button-row { flex-direction: column; align-items: flex-start; }
+      .btn { width: 100%; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <div class="top-banner">
+    Next Study: Saturday • 8:00 AM Pacific • Join in person at Menlo Church or online via Zoom —
+    <a href="https://zoom.us/j/472427166" target="_blank" rel="noopener noreferrer">Join Zoom</a>
+  </div>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <div>
+        <div class="brand-title">Saturday Morning Men’s Bible Study</div>
+        <div class="brand-subtitle">Faith • Wisdom • Fellowship</div>
       </div>
+      <nav class="nav">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#weekly-meeting">Weekly Meeting</a>
+        <a href="#this-weeks-topic">This Week’s Topic</a>
+        <a href="#past-talks">Past Talks</a>
+        <a href="#questions">Questions</a>
+        <a href="#prayer-requests">Prayer Requests</a>
+        <a href="#resources">Resources</a>
+        <a href="#photos">Photos</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
 
-      <header className="sticky top-0 z-50 border-b border-white/10 bg-[#1F3A5F]/95 backdrop-blur">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-          <div>
-            <div className="text-xl font-serif text-white">Saturday Morning Men’s Bible Study</div>
-            <div className="text-sm tracking-wide text-[#D8BE73]">Faith • Wisdom • Fellowship</div>
-          </div>
-          <nav className="hidden gap-5 text-sm text-white/90 xl:flex">
-            {navItems.map((item) => (
-              <a
-                key={item}
-                href={`#${item.toLowerCase().replace(/[^a-z]+/g, "-")}`}
-                className="transition hover:text-[#D8BE73]"
-              >
-                {item}
-              </a>
-            ))}
-          </nav>
+  <section id="home" class="hero">
+    <div class="container hero-inner">
+      <div class="hero-card">
+        <div class="eyebrow">Menlo Church • Menlo Park</div>
+        <h1>Saturday Morning Men’s Bible Study</h1>
+        <div class="hero-tagline">A place for men who are not afraid to ask difficult questions about faith, Scripture, and life.</div>
+        <div class="hero-details">
+          <div>Saturdays at 8:00 AM</div>
+          <div>Coffee and donuts provided</div>
+          <div class="zoom-note">Also available nationwide via Zoom</div>
+          <div>Zoom ID: 472 427 166</div>
+          <div>Meeting Name: Saturday Men’s Bible Study</div>
         </div>
-      </header>
-
-      <section
-        id="home"
-        className="relative overflow-hidden"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(31,58,95,0.62), rgba(31,58,95,0.62)), url('https://images.unsplash.com/photo-1504052434569-70ad5836ab65?auto=format&fit=crop&w=1600&q=80')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
-        <div className="mx-auto max-w-7xl px-6 py-28 md:py-36">
-          <div className="max-w-3xl rounded-3xl border border-white/15 bg-black/10 p-8 shadow-2xl backdrop-blur-sm">
-            <p className="mb-4 text-sm uppercase tracking-[0.25em] text-[#E5D39C]">Menlo Church • Menlo Park</p>
-            <h1 className="text-4xl font-serif leading-tight text-white md:text-6xl">
-              Saturday Morning Men’s Bible Study
-            </h1>
-            <p className="mt-6 text-xl italic leading-relaxed text-white/95 md:text-2xl">
-              A place for men who are not afraid to ask difficult questions about faith, Scripture, and life.
-            </p>
-            <div className="mt-6 space-y-2 text-lg text-white/90">
-              <div>Saturdays at 8:00 AM</div>
-              <div>Coffee and donuts provided</div>
-              <div className="text-[#E5D39C]">Also available nationwide via Zoom</div>
-              <div>Zoom ID: 472 427 166</div>
-              <div>Meeting Name: Saturday Men&apos;s Bible Study</div>
-            </div>
-            <div className="mt-8 flex flex-wrap gap-4">
-              <a
-                href="https://zoom.us/j/472427166"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="rounded-2xl bg-white px-6 py-3 text-base font-semibold text-[#1F3A5F] shadow-lg transition hover:-translate-y-0.5"
-              >
-                Join Zoom Meeting
-              </a>
-              <a
-                href="#weekly-meeting"
-                className="rounded-2xl bg-[#C8A24A] px-6 py-3 text-base font-semibold text-[#1F3A5F] shadow-lg transition hover:-translate-y-0.5"
-              >
-                Join Us This Saturday
-              </a>
-              <a
-                href="#this-week-s-topic"
-                className="rounded-2xl border border-white/40 px-6 py-3 text-base font-semibold text-white transition hover:bg-white/10"
-              >
-                See This Week’s Topic
-              </a>
-            </div>
-          </div>
+        <div class="button-row">
+          <a class="btn btn-secondary" href="https://zoom.us/j/472427166" target="_blank" rel="noopener noreferrer">Join Zoom Meeting</a>
+          <a class="btn btn-primary" href="#weekly-meeting">Join Us This Saturday</a>
+          <a class="btn btn-outline" href="#this-weeks-topic">See This Week’s Topic</a>
         </div>
-      </section>
+      </div>
+    </div>
+  </section>
 
-      <section className="mx-auto max-w-7xl px-6 py-20">
-        <div className="mb-10 text-center">
-          <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#C8A24A]">What You’ll Find Here</p>
-          <h2 className="mt-3 text-3xl font-serif text-[#1F3A5F] md:text-4xl">
-            Thoughtful faith, honest questions, real fellowship
-          </h2>
+  <section class="section">
+    <div class="container">
+      <div class="section-title-wrap">
+        <div class="section-kicker">What You’ll Find Here</div>
+        <h2 class="section-title">Thoughtful faith, honest questions, real fellowship</h2>
+      </div>
+      <div class="grid-3">
+        <div class="card">
+          <h3>Thoughtful Discussion</h3>
+          <p>Each week a speaker presents a passage of Scripture or an important question about faith and life.</p>
         </div>
-        <div className="grid gap-6 md:grid-cols-3">
-          {[
-            {
-              title: "Thoughtful Discussion",
-              text: "Each week a speaker presents a passage of Scripture or an important question about faith and life.",
-            },
-            {
-              title: "Honest Questions",
-              text: "We welcome real questions and open conversation about what the Bible teaches and how it shapes daily life.",
-            },
-            {
-              title: "Brotherhood",
-              text: "Men support one another through prayer, encouragement, friendship, and practical care.",
-            },
-          ].map((card) => (
-            <div key={card.title} className="rounded-3xl bg-white p-8 shadow-lg shadow-[#1F3A5F]/10">
-              <h3 className="text-2xl font-serif text-[#1F3A5F]">{card.title}</h3>
-              <p className="mt-4 text-base leading-7 text-[#444]">{card.text}</p>
-            </div>
-          ))}
+        <div class="card">
+          <h3>Honest Questions</h3>
+          <p>We welcome real questions and open conversation about what the Bible teaches and how it shapes daily life.</p>
         </div>
-      </section>
-
-      <section
-        className="relative overflow-hidden py-20"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(31,58,95,0.72), rgba(31,58,95,0.72)), url('https://images.unsplash.com/photo-1504052434569-70ad5836ab65?auto=format&fit=crop&w=1600&q=80')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
-        <div className="mx-auto max-w-5xl px-6 text-center text-white">
-          <p className="text-3xl font-serif italic leading-relaxed md:text-4xl">
-            “Let the word of Christ dwell in you richly as you teach and admonish one another with all wisdom.”
-          </p>
-          <p className="mt-5 text-lg text-[#E5D39C]">— Colossians 3:16</p>
+        <div class="card">
+          <h3>Brotherhood</h3>
+          <p>Men support one another through prayer, encouragement, friendship, and practical care.</p>
         </div>
-      </section>
+      </div>
+    </div>
+  </section>
 
-      <section id="about" className="mx-auto max-w-7xl px-6 py-20">
-        <div className="grid items-center gap-10 lg:grid-cols-2">
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#C8A24A]">About the Group</p>
-            <h2 className="mt-3 text-3xl font-serif text-[#1F3A5F] md:text-4xl">
-              A welcoming Saturday gathering for men
-            </h2>
-            <p className="mt-6 text-lg leading-8 text-[#444]">
-              Men from many backgrounds gather each Saturday morning for thoughtful discussion of the Bible,
-              prayer for one another, and friendship rooted in faith. Each week a knowledgeable speaker leads a
-              conversation on a passage of Scripture or a topic relevant to living faithfully today.
-            </p>
-            <div className="mt-8 grid gap-4 sm:grid-cols-2">
-              {[
-                "Open and respectful discussion",
-                "Insightful weekly speakers",
-                "Practical Christian living",
-                "Support during life’s challenges",
-              ].map((item) => (
-                <div key={item} className="rounded-2xl bg-white p-4 shadow">
-                  <span className="font-medium text-[#1F3A5F]">{item}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div>
-            <img
-              className="h-[420px] w-full rounded-[2rem] object-cover shadow-2xl"
-              src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1200&q=80"
-              alt="Men talking together over coffee"
-            />
-          </div>
+  <section class="section quote-section">
+    <div class="container">
+      <div class="quote-text">“Let the word of Christ dwell in you richly as you teach and admonish one another with all wisdom.”</div>
+      <div class="quote-ref">— Colossians 3:16</div>
+    </div>
+  </section>
+
+  <section id="about" class="section">
+    <div class="container about-grid">
+      <div>
+        <div class="section-kicker">About the Group</div>
+        <h2 class="section-title" style="text-align:left;">A welcoming Saturday gathering for men</h2>
+        <p class="body-copy">Men from many backgrounds gather each Saturday morning for thoughtful discussion of the Bible, prayer for one another, and friendship rooted in faith. Each week a knowledgeable speaker leads a conversation on a passage of Scripture or a topic relevant to living faithfully today.</p>
+        <div class="feature-list">
+          <div class="feature-pill">Open and respectful discussion</div>
+          <div class="feature-pill">Insightful weekly speakers</div>
+          <div class="feature-pill">Practical Christian living</div>
+          <div class="feature-pill">Support during life’s challenges</div>
         </div>
-      </section>
+      </div>
+      <div class="image-card">
+        <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1200&q=80" alt="Men talking together over coffee" />
+      </div>
+    </div>
+  </section>
 
-      <section id="weekly-meeting" className="bg-white py-20">
-        <div className="mx-auto max-w-7xl px-6">
-          <div className="mb-10 text-center">
-            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#C8A24A]">Saturday Mornings</p>
-            <h2 className="mt-3 text-3xl font-serif text-[#1F3A5F] md:text-4xl">What happens each week</h2>
-          </div>
-          <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
-            <div className="rounded-[2rem] bg-[#F8F6F0] p-8 shadow-lg">
-              <div className="space-y-5 text-lg text-[#444]">
-                <div className="flex items-start justify-between gap-4 border-b border-[#ddd] pb-4">
-                  <span>8:00</span>
-                  <span className="font-medium text-[#1F3A5F]">Coffee &amp; donuts</span>
-                </div>
-                <div className="flex items-start justify-between gap-4 border-b border-[#ddd] pb-4">
-                  <span>8:10</span>
-                  <span className="font-medium text-[#1F3A5F]">Opening prayer</span>
-                </div>
-                <div className="flex items-start justify-between gap-4 border-b border-[#ddd] pb-4">
-                  <span>8:15</span>
-                  <span className="font-medium text-[#1F3A5F]">Speaker presentation</span>
-                </div>
-                <div className="flex items-start justify-between gap-4 border-b border-[#ddd] pb-4">
-                  <span>8:45</span>
-                  <span className="font-medium text-[#1F3A5F]">Discussion and questions</span>
-                </div>
-                <div className="flex items-start justify-between gap-4">
-                  <span>9:15</span>
-                  <span className="font-medium text-[#1F3A5F]">Prayer requests</span>
-                </div>
-              </div>
-            </div>
-            <div className="rounded-[2rem] bg-[#1F3A5F] p-8 text-white shadow-xl">
-              <h3 className="text-2xl font-serif">Location</h3>
-              <p className="mt-4 text-lg text-white/90">Menlo Church</p>
-              <p className="text-white/80">Menlo Park, California</p>
-              <div className="mt-6 rounded-3xl bg-white/10 p-5">
-                <p className="text-sm uppercase tracking-wider text-[#E5D39C]">Join Online via Zoom</p>
-                <p className="mt-2 text-lg">Meeting ID: 472 427 166</p>
-                <p className="text-white/80">Saturday Men&apos;s Bible Study</p>
-              </div>
-              <div className="mt-8 rounded-3xl bg-white/10 p-5">
-                <p className="text-sm uppercase tracking-wider text-[#E5D39C]">Every Saturday</p>
-                <p className="mt-2 text-3xl font-serif">8:00 AM – 9:30 AM</p>
-              </div>
-              <a
-                href="#contact"
-                className="mt-8 inline-block rounded-2xl bg-[#C8A24A] px-5 py-3 font-semibold text-[#1F3A5F]"
-              >
-                Get in Touch
-              </a>
-            </div>
-          </div>
+  <section id="weekly-meeting" class="section section-white">
+    <div class="container">
+      <div class="section-title-wrap">
+        <div class="section-kicker">Saturday Mornings</div>
+        <h2 class="section-title">What happens each week</h2>
+      </div>
+      <div class="schedule-grid">
+        <div class="card card-muted">
+          <div class="schedule-row"><span>8:00</span><strong>Coffee &amp; donuts</strong></div>
+          <div class="schedule-row"><span>8:10</span><strong>Opening prayer</strong></div>
+          <div class="schedule-row"><span>8:15</span><strong>Speaker presentation</strong></div>
+          <div class="schedule-row"><span>8:45</span><strong>Discussion and questions</strong></div>
+          <div class="schedule-row"><span>9:15</span><strong>Prayer requests</strong></div>
         </div>
-      </section>
-
-      <section id="this-week-s-topic" className="mx-auto max-w-7xl px-6 py-20">
-        <div className="rounded-[2rem] bg-[#1F3A5F] p-8 text-white shadow-2xl md:p-12">
-          <div className="mb-8 rounded-3xl border border-white/15 bg-white/5 p-5 md:p-6">
-            <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
-              <div>
-                <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#E5D39C]">Weekly Update Panel</p>
-                <p className="mt-2 max-w-2xl text-sm leading-6 text-white/80">
-                  The website administrator only needs to update these fields each week in the{" "}
-                  <span className="font-semibold text-white">siteContent.weeklyTopic</span> section at the top of the file.
-                </p>
-              </div>
-              <div className="rounded-2xl bg-black/10 px-4 py-3 text-sm text-white/85">
-                Designed for quick weekly editing.
-              </div>
-            </div>
-            <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-              <div className="rounded-2xl bg-white/10 p-4">
-                <div className="text-xs uppercase tracking-[0.22em] text-[#E5D39C]">Date</div>
-                <div className="mt-2 text-lg font-medium text-white">{siteContent.weeklyTopic.date}</div>
-              </div>
-              <div className="rounded-2xl bg-white/10 p-4">
-                <div className="text-xs uppercase tracking-[0.22em] text-[#E5D39C]">Speaker</div>
-                <div className="mt-2 text-lg font-medium text-white">{siteContent.weeklyTopic.speaker}</div>
-              </div>
-              <div className="rounded-2xl bg-white/10 p-4 md:col-span-2 xl:col-span-1">
-                <div className="text-xs uppercase tracking-[0.22em] text-[#E5D39C]">Topic Title</div>
-                <div className="mt-2 text-lg font-medium text-white">{siteContent.weeklyTopic.title}</div>
-              </div>
-              <div className="rounded-2xl bg-white/10 p-4 md:col-span-2 xl:col-span-3">
-                <div className="text-xs uppercase tracking-[0.22em] text-[#E5D39C]">Short Summary</div>
-                <div className="mt-2 text-base leading-7 text-white/90">{siteContent.weeklyTopic.summary}</div>
-              </div>
-              <div className="rounded-2xl bg-white/10 p-4 md:col-span-2 xl:col-span-1">
-                <div className="text-xs uppercase tracking-[0.22em] text-[#E5D39C]">Scripture References</div>
-                <div className="mt-2 space-y-1 text-base text-white/90">
-                  {siteContent.weeklyTopic.scriptures.map((verse) => (
-                    <div key={verse}>{verse}</div>
-                  ))}
-                </div>
-              </div>
-              <div className="rounded-2xl bg-white/10 p-4 md:col-span-2 xl:col-span-2">
-                <div className="text-xs uppercase tracking-[0.22em] text-[#E5D39C]">Question of the Week</div>
-                <div className="mt-2 text-base leading-7 text-white/90">{siteContent.weeklyTopic.questionOfTheWeek}</div>
-              </div>
-            </div>
+        <div class="navy-card">
+          <h3>Location</h3>
+          <p class="detail-text" style="font-size:18px; color:rgba(255,255,255,0.92); margin:18px 0 0;">Menlo Church</p>
+          <p class="detail-text" style="font-size:18px; color:rgba(255,255,255,0.78); margin:0;">Menlo Park, California</p>
+          <div class="mini-panel">
+            <div class="mini-label">Join Online via Zoom</div>
+            <p>Meeting ID: 472 427 166<br />Saturday Men’s Bible Study</p>
           </div>
+          <div class="mini-panel">
+            <div class="mini-label">Every Saturday</div>
+            <p style="font-size:32px; line-height:1.35;">8:00 AM – 9:30 AM</p>
+          </div>
+          <a class="btn btn-primary" style="margin-top:24px;" href="#contact">Get in Touch</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-          <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#E5D39C]">This Week’s Topic</p>
-          <div className="mt-4 grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
+  <section id="this-weeks-topic" class="section">
+    <div class="container">
+      <div class="topic-card">
+        <div class="topic-admin">
+          <div class="topic-admin-top">
             <div>
-              <div className="mb-3 flex flex-wrap gap-3 text-sm text-white/75">
-                <span className="rounded-full bg-white/10 px-3 py-1">{siteContent.weeklyTopic.date}</span>
-                <span className="rounded-full bg-white/10 px-3 py-1">Speaker: {siteContent.weeklyTopic.speaker}</span>
-              </div>
-              <h2 className="text-3xl font-serif md:text-4xl">{siteContent.weeklyTopic.title}</h2>
-              <p className="mt-4 text-lg text-white/85">{siteContent.weeklyTopic.summary}</p>
-              <div className="mt-8 grid gap-4 sm:grid-cols-2">
-                <div className="rounded-2xl bg-white/10 p-5">
-                  <div className="text-sm uppercase tracking-wider text-[#E5D39C]">Scripture</div>
-                  {siteContent.weeklyTopic.scriptures.map((verse) => (
-                    <div key={verse} className="mt-2 text-lg last:mt-0">
-                      {verse}
-                    </div>
-                  ))}
-                </div>
-                <div className="rounded-2xl bg-white/10 p-5">
-                  <div className="text-sm uppercase tracking-wider text-[#E5D39C]">Question of the Week</div>
-                  <div className="mt-2 text-lg">{siteContent.weeklyTopic.questionOfTheWeek}</div>
-                </div>
-              </div>
+              <div class="section-kicker" style="margin-bottom:6px; color:var(--gold-light);">Weekly Update Panel</div>
+              <div style="font:400 15px/1.7 Arial, sans-serif; color:rgba(255,255,255,0.82); max-width:760px;">The website administrator only needs to update the highlighted fields in this section each week before publishing.</div>
             </div>
-            <div className="rounded-[2rem] bg-white p-6 text-[#333]">
-              <h3 className="text-2xl font-serif text-[#1F3A5F]">Discussion Questions</h3>
-              <ul className="mt-5 space-y-4 text-base leading-7">
-                {siteContent.weeklyTopic.discussionQuestions.map((question) => (
-                  <li key={question}>{question}</li>
-                ))}
+            <div class="topic-admin-note">Designed for quick weekly editing</div>
+          </div>
+          <div class="topic-admin-grid">
+            <div class="topic-admin-item">
+              <div>Date</div>
+              <div>Saturday, March 14</div>
+            </div>
+            <div class="topic-admin-item">
+              <div>Speaker</div>
+              <div>Guest Speaker</div>
+            </div>
+            <div class="topic-admin-item">
+              <div>Topic Title</div>
+              <div>What Does It Mean to Understand God’s Will?</div>
+            </div>
+            <div class="topic-admin-item wide-3">
+              <div>Short Summary</div>
+              <div>Saturday morning discussion led by a knowledgeable speaker, followed by open conversation and prayer.</div>
+            </div>
+            <div class="topic-admin-item">
+              <div>Scripture References</div>
+              <ul>
+                <li>Romans 12:2</li>
+                <li>Ephesians 5:15–17</li>
               </ul>
             </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="admin-guide" className="bg-white py-20">
-        <div className="mx-auto max-w-7xl px-6">
-          <div className="mb-10 text-center">
-            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#C8A24A]">Administrator Guide</p>
-            <h2 className="mt-3 text-3xl font-serif text-[#1F3A5F] md:text-4xl">
-              What should be updated each week
-            </h2>
-          </div>
-          <div className="mb-8 rounded-[2rem] bg-[#1F3A5F] p-6 text-white shadow-xl">
-            <h3 className="text-2xl font-serif">Email Routing</h3>
-            <div className="mt-4 grid gap-4 md:grid-cols-3">
-              <div className="rounded-2xl bg-white/10 p-4">
-                <div className="text-xs uppercase tracking-[0.22em] text-[#E5D39C]">Prayer Requests</div>
-                <a className="mt-2 block text-base underline" href={`mailto:${siteContent.contact.prayerEmail}`}>
-                  {siteContent.contact.prayerEmail}
-                </a>
-              </div>
-              <div className="rounded-2xl bg-white/10 p-4">
-                <div className="text-xs uppercase tracking-[0.22em] text-[#E5D39C]">General Contact</div>
-                <a className="mt-2 block text-base underline" href={`mailto:${siteContent.contact.generalEmail}`}>
-                  {siteContent.contact.generalEmail}
-                </a>
-              </div>
-              <div className="rounded-2xl bg-white/10 p-4">
-                <div className="text-xs uppercase tracking-[0.22em] text-[#E5D39C]">Website Administrator</div>
-                <a className="mt-2 block text-base underline" href={`mailto:${siteContent.contact.adminEmail}`}>
-                  {siteContent.contact.adminEmail}
-                </a>
-              </div>
-            </div>
-            <p className="mt-4 text-sm leading-6 text-white/80">
-              Change these three email addresses in <span className="font-semibold text-white">siteContent.contact</span> at the top of the file.
-            </p>
-          </div>
-          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-            {siteContent.adminNotes.map((note) => (
-              <div key={note} className="rounded-3xl bg-[#F8F6F0] p-6 shadow-sm">
-                <p className="text-lg leading-8 text-[#1F3A5F]">{note}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="past-talks" className="bg-white py-20">
-        <div className="mx-auto max-w-7xl px-6">
-          <div className="mb-10 text-center">
-            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#C8A24A]">Past Talks Archive</p>
-            <h2 className="mt-3 text-3xl font-serif text-[#1F3A5F] md:text-4xl">Recent discussion topics</h2>
-          </div>
-          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-            {siteContent.pastTalks.map((talk) => (
-              <div
-                key={talk.date + talk.title}
-                className="rounded-3xl border border-[#e7e2d8] bg-[#F8F6F0] p-6 shadow-sm"
-              >
-                <div className="text-sm uppercase tracking-wider text-[#C8A24A]">{talk.date}</div>
-                <div className="mt-3 text-2xl font-serif text-[#1F3A5F]">{talk.title}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="questions" className="mx-auto max-w-7xl px-6 py-20">
-        <div className="mb-10 text-center">
-          <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#C8A24A]">Big Questions Worth Asking</p>
-          <h2 className="mt-3 text-3xl font-serif text-[#1F3A5F] md:text-4xl">
-            Questions that shape meaningful conversations
-          </h2>
-        </div>
-        <div className="grid gap-5 md:grid-cols-2">
-          {questions.map((q) => (
-            <div key={q} className="rounded-3xl bg-white p-6 shadow-md">
-              <p className="text-lg leading-8 text-[#1F3A5F]">{q}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section id="prayer-requests" className="bg-white py-20">
-        <div className="mx-auto max-w-5xl px-6">
-          <div className="rounded-[2rem] bg-[#1F3A5F] p-8 text-white shadow-2xl md:p-12">
-            <div className="grid gap-8 lg:grid-cols-[1fr_0.95fr]">
-              <div>
-                <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#E5D39C]">Prayer Requests</p>
-                <h2 className="mt-3 text-3xl font-serif md:text-4xl">
-                  We believe in supporting one another through prayer
-                </h2>
-                <p className="mt-5 text-lg leading-8 text-white/85">
-                  Share a need, a concern, or a person you would like remembered in prayer. Prayer requests may be personal or for someone else.
-                </p>
-              </div>
-              <form
-                className="space-y-4 rounded-[1.5rem] bg-white p-6 text-[#333] shadow-lg"
-                action={`mailto:${siteContent.contact.prayerEmail}`}
-                method="post"
-                encType="text/plain"
-              >
-                <input
-                  name="name"
-                  className="w-full rounded-2xl border border-[#ddd] px-4 py-3 outline-none"
-                  placeholder="Name (optional)"
-                />
-                <input
-                  name="email"
-                  className="w-full rounded-2xl border border-[#ddd] px-4 py-3 outline-none"
-                  placeholder="Email (optional)"
-                />
-                <textarea
-                  name="prayerRequest"
-                  className="h-32 w-full rounded-2xl border border-[#ddd] px-4 py-3 outline-none"
-                  placeholder="Prayer request"
-                />
-                <button
-                  type="submit"
-                  className="rounded-2xl bg-[#C8A24A] px-5 py-3 font-semibold text-[#1F3A5F]"
-                >
-                  Email Prayer Request
-                </button>
-                <p className="text-sm leading-6 text-[#666]">
-                  This button opens your email app and sends the request to{" "}
-                  <a className="font-medium text-[#1F3A5F] underline" href={`mailto:${siteContent.contact.prayerEmail}`}>
-                    {siteContent.contact.prayerEmail}
-                  </a>
-                  .
-                </p>
-              </form>
+            <div class="topic-admin-item wide-2">
+              <div>Question of the Week</div>
+              <div>If God is sovereign, how do we understand human freedom?</div>
             </div>
           </div>
         </div>
-      </section>
 
-      <section id="resources" className="mx-auto max-w-7xl px-6 py-20">
-        <div className="mb-10 text-center">
-          <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#C8A24A]">Resources</p>
-          <h2 className="mt-3 text-3xl font-serif text-[#1F3A5F] md:text-4xl">Helpful Bible study tools</h2>
-        </div>
-        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-          {resources.map((r) => (
-            <div key={r.name} className="rounded-3xl bg-white p-6 shadow-lg shadow-[#1F3A5F]/10">
-              <h3 className="text-2xl font-serif text-[#1F3A5F]">{r.name}</h3>
-              <p className="mt-4 leading-7 text-[#444]">{r.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section id="photos" className="bg-white py-20">
-        <div className="mx-auto max-w-7xl px-6">
-          <div className="mb-10 text-center">
-            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#C8A24A]">Photos</p>
-            <h2 className="mt-3 text-3xl font-serif text-[#1F3A5F] md:text-4xl">A glimpse of the atmosphere</h2>
-          </div>
-          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-            {photoCards.map((caption, idx) => (
-              <div key={caption} className="overflow-hidden rounded-[2rem] bg-[#F8F6F0] shadow-lg">
-                <img
-                  className="h-56 w-full object-cover"
-                  src={`https://images.unsplash.com/photo-${
-                    idx % 2 === 0 ? "1517457373958-b7bdd4587205" : "1522202176988-66273c2fd55f"
-                  }?auto=format&fit=crop&w=900&q=80`}
-                  alt={caption}
-                />
-                <div className="p-5 text-base leading-7 text-[#1F3A5F]">{caption}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="contact" className="mx-auto max-w-7xl px-6 py-20">
-        <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
-          <div className="rounded-[2rem] bg-[#1F3A5F] p-8 text-white shadow-2xl">
-            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#E5D39C]">Contact</p>
-            <h2 className="mt-3 text-3xl font-serif md:text-4xl">You’re welcome to join us</h2>
-            <p className="mt-5 text-lg leading-8 text-white/85">
-              Whether you are deeply familiar with the Bible or simply curious, you are welcome. Men of all ages and backgrounds gather to learn, listen, and grow together.
-            </p>
-            <div className="mt-8 space-y-3 text-lg">
-              <div>Saturday Morning Men’s Bible Study</div>
-              <div>Menlo Church – Menlo Park</div>
-              <div>Saturdays at 8:00 AM</div>
-              <div>
-                General inquiries:{" "}
-                <a className="underline" href={`mailto:${siteContent.contact.generalEmail}`}>
-                  {siteContent.contact.generalEmail}
-                </a>
-              </div>
-              <div>
-                Prayer requests:{" "}
-                <a className="underline" href={`mailto:${siteContent.contact.prayerEmail}`}>
-                  {siteContent.contact.prayerEmail}
-                </a>
-              </div>
-            </div>
-          </div>
-          <form
-            className="rounded-[2rem] bg-white p-8 shadow-lg shadow-[#1F3A5F]/10"
-            action={`mailto:${siteContent.contact.generalEmail}`}
-            method="post"
-            encType="text/plain"
-          >
-            <div className="grid gap-4 md:grid-cols-2">
-              <input
-                name="name"
-                className="rounded-2xl border border-[#ddd] px-4 py-3 outline-none"
-                placeholder="Name"
-              />
-              <input
-                name="email"
-                className="rounded-2xl border border-[#ddd] px-4 py-3 outline-none"
-                placeholder="Email"
-              />
-            </div>
-            <input
-              name="subject"
-              className="mt-4 w-full rounded-2xl border border-[#ddd] px-4 py-3 outline-none"
-              placeholder="Subject"
-            />
-            <textarea
-              name="message"
-              className="mt-4 h-40 w-full rounded-2xl border border-[#ddd] px-4 py-3 outline-none"
-              placeholder="Message"
-            />
-            <button
-              type="submit"
-              className="mt-4 rounded-2xl bg-[#C8A24A] px-6 py-3 font-semibold text-[#1F3A5F]"
-            >
-              Email Message
-            </button>
-            <p className="mt-4 text-sm leading-6 text-[#666]">
-              This button opens your email app and sends your message to{" "}
-              <a className="font-medium text-[#1F3A5F] underline" href={`mailto:${siteContent.contact.generalEmail}`}>
-                {siteContent.contact.generalEmail}
-              </a>
-              .
-            </p>
-          </form>
-        </div>
-      </section>
-
-      <footer className="bg-[#1F3A5F] px-6 py-10 text-white">
-        <div className="mx-auto flex max-w-7xl flex-col gap-4 md:flex-row md:items-center md:justify-between">
+        <div class="section-kicker" style="color:var(--gold-light); margin-bottom:10px;">This Week’s Topic</div>
+        <div class="topic-main-grid">
           <div>
-            <div className="text-xl font-serif">Saturday Morning Men’s Bible Study</div>
-            <div className="mt-1 text-white/75">Menlo Church • Menlo Park • Saturdays at 8:00 AM</div>
+            <div class="topic-badges">
+              <span class="badge">Saturday, March 14</span>
+              <span class="badge">Speaker: Guest Speaker</span>
+            </div>
+            <h2 style="font-size:48px; color:white;">What Does It Mean to Understand God’s Will?</h2>
+            <p style="font:400 18px/1.8 Arial, sans-serif; color:rgba(255,255,255,0.86); margin-top:16px;">Saturday morning discussion led by a knowledgeable speaker, followed by open conversation and prayer.</p>
+            <div class="topic-box-grid">
+              <div class="topic-box">
+                <div class="topic-box-title">Scripture</div>
+                <div>Romans 12:2</div>
+                <div>Ephesians 5:15–17</div>
+              </div>
+              <div class="topic-box">
+                <div class="topic-box-title">Question of the Week</div>
+                <p>If God is sovereign, how do we understand human freedom?</p>
+              </div>
+            </div>
           </div>
-          <div className="text-sm uppercase tracking-[0.2em] text-[#D8BE73]">Faith • Wisdom • Fellowship</div>
+          <div class="white-topic-panel">
+            <h3>Discussion Questions</h3>
+            <ul>
+              <li>Can anyone truly know God’s will?</li>
+              <li>What role does wisdom play in discernment?</li>
+              <li>How do we distinguish God’s will from our own desires?</li>
+              <li>What does faithful obedience look like in ordinary life?</li>
+            </ul>
+          </div>
         </div>
-      </footer>
+      </div>
     </div>
-  );
-}
+  </section>
+
+  <section id="admin-guide" class="section section-white">
+    <div class="container">
+      <div class="section-title-wrap">
+        <div class="section-kicker">Administrator Guide</div>
+        <h2 class="section-title">What should be updated each week</h2>
+      </div>
+      <div class="navy-card" style="margin-bottom:24px;">
+        <h3>Email Routing</h3>
+        <div class="grid-3" style="margin-top:18px;">
+          <div class="mini-panel">
+            <div class="mini-label">Prayer Requests</div>
+            <p><a href="mailto:saturdaymensbiblestudy@gmail.com">saturdaymensbiblestudy@gmail.com</a></p>
+          </div>
+          <div class="mini-panel">
+            <div class="mini-label">General Contact</div>
+            <p><a href="mailto:saturdaymensbiblestudy@gmail.com">saturdaymensbiblestudy@gmail.com</a></p>
+          </div>
+          <div class="mini-panel">
+            <div class="mini-label">Website Administrator</div>
+            <p><a href="mailto:saturdaymensbiblestudy@gmail.com">saturdaymensbiblestudy@gmail.com</a></p>
+          </div>
+        </div>
+      </div>
+      <div class="grid-4 note-grid">
+        <div class="card card-muted"><p>Update the date for the upcoming Saturday.</p></div>
+        <div class="card card-muted"><p>Enter the speaker’s name.</p></div>
+        <div class="card card-muted"><p>Update the weekly topic title and short summary.</p></div>
+        <div class="card card-muted"><p>Replace the scripture references for the current speaker.</p></div>
+        <div class="card card-muted"><p>Change the Question of the Week.</p></div>
+        <div class="card card-muted"><p>Update the four discussion questions.</p></div>
+        <div class="card card-muted"><p>Move last week’s topic into Past Talks.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="past-talks" class="section section-white">
+    <div class="container">
+      <div class="section-title-wrap">
+        <div class="section-kicker">Past Talks Archive</div>
+        <h2 class="section-title">Recent discussion topics</h2>
+      </div>
+      <div class="grid-3 archive-grid">
+        <div class="card card-muted"><div class="date">Feb 28</div><h3>Faith and Doubt</h3></div>
+        <div class="card card-muted"><div class="date">Feb 21</div><h3>What Is Biblical Justice?</h3></div>
+        <div class="card card-muted"><div class="date">Feb 14</div><h3>Living With Integrity</h3></div>
+        <div class="card card-muted"><div class="date">Feb 7</div><h3>Suffering, Prayer, and Hope</h3></div>
+        <div class="card card-muted"><div class="date">Jan 31</div><h3>Understanding God’s Will</h3></div>
+        <div class="card card-muted"><div class="date">Jan 24</div><h3>Grace, Truth, and Humility</h3></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="questions" class="section">
+    <div class="container">
+      <div class="section-title-wrap">
+        <div class="section-kicker">Big Questions Worth Asking</div>
+        <h2 class="section-title">Questions that shape meaningful conversations</h2>
+      </div>
+      <div class="grid-2 questions-grid">
+        <div class="card"><p>What does the Bible really say about forgiveness?</p></div>
+        <div class="card"><p>Why does God allow suffering?</p></div>
+        <div class="card"><p>What does it mean to live a life of faith today?</p></div>
+        <div class="card"><p>How do we know God’s will?</p></div>
+        <div class="card"><p>What does the Bible say about justice?</p></div>
+        <div class="card"><p>What is true wisdom?</p></div>
+        <div class="card"><p>How should Christians treat those who disagree with them?</p></div>
+        <div class="card"><p>What does the Bible teach about integrity?</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="prayer-requests" class="section section-white">
+    <div class="container prayer-grid">
+      <div class="prayer-card">
+        <div class="section-kicker" style="color:var(--gold-light);">Prayer Requests</div>
+        <h2 class="section-title" style="color:white; text-align:left;">We believe in supporting one another through prayer</h2>
+        <p style="font:400 18px/1.9 Arial, sans-serif; color:rgba(255,255,255,0.86); margin-top:18px;">Share a need, a concern, or a person you would like remembered in prayer. Prayer requests may be personal or for someone else.</p>
+      </div>
+      <form class="form-card" action="mailto:saturdaymensbiblestudy@gmail.com" method="post" enctype="text/plain">
+        <input name="name" placeholder="Name (optional)" />
+        <input name="email" placeholder="Email (optional)" />
+        <textarea name="prayerRequest" placeholder="Prayer request"></textarea>
+        <button class="btn btn-primary" type="submit">Email Prayer Request</button>
+        <div class="help-text">This button opens your email app and sends the request to <a href="mailto:saturdaymensbiblestudy@gmail.com">saturdaymensbiblestudy@gmail.com</a>.</div>
+      </form>
+    </div>
+  </section>
+
+  <section id="resources" class="section">
+    <div class="container">
+      <div class="section-title-wrap">
+        <div class="section-kicker">Resources</div>
+        <h2 class="section-title">Helpful Bible study tools</h2>
+      </div>
+      <div class="grid-4">
+        <div class="card resource-card">
+          <a href="https://www.biblegateway.com" target="_blank" rel="noopener noreferrer"><h3>Bible Gateway</h3></a>
+          <p>Online Bible translations and search tools.</p>
+        </div>
+        <div class="card resource-card">
+          <a href="https://www.blueletterbible.org" target="_blank" rel="noopener noreferrer"><h3>Blue Letter Bible</h3></a>
+          <p>Study resources, commentaries, and concordances.</p>
+        </div>
+        <div class="card resource-card">
+          <a href="https://www.menlo.church" target="_blank" rel="noopener noreferrer"><h3>Menlo Church</h3></a>
+          <p>Church information and ministries.</p>
+        </div>
+        <div class="card resource-card">
+          <h3>Recommended Books</h3>
+          <p>Books for deeper reflection and discussion.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="photos" class="section section-white">
+    <div class="container">
+      <div class="section-title-wrap">
+        <div class="section-kicker">Photos</div>
+        <h2 class="section-title">A glimpse of the atmosphere</h2>
+      </div>
+      <div class="photo-grid">
+        <div class="photo-card">
+          <img src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=900&q=80" alt="Men sharing coffee and conversation before the study begins" />
+          <div class="caption">Men sharing coffee and conversation before the study begins</div>
+        </div>
+        <div class="photo-card">
+          <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=900&q=80" alt="A thoughtful Saturday morning discussion around Scripture" />
+          <div class="caption">A thoughtful Saturday morning discussion around Scripture</div>
+        </div>
+        <div class="photo-card">
+          <img src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=900&q=80" alt="Prayer for those facing difficult times" />
+          <div class="caption">Prayer for those facing difficult times</div>
+        </div>
+        <div class="photo-card">
+          <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=900&q=80" alt="Warm fellowship and friendship at Menlo Church" />
+          <div class="caption">Warm fellowship and friendship at Menlo Church</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section">
+    <div class="container contact-grid">
+      <div class="contact-card">
+        <div class="section-kicker" style="color:var(--gold-light);">Contact</div>
+        <h2 class="section-title" style="color:white; text-align:left;">You’re welcome to join us</h2>
+        <p style="font:400 18px/1.9 Arial, sans-serif; color:rgba(255,255,255,0.86); margin-top:18px;">Whether you are deeply familiar with the Bible or simply curious, you are welcome. Men of all ages and backgrounds gather to learn, listen, and grow together.</p>
+        <div style="margin-top:26px; font:400 18px/1.9 Arial, sans-serif; color:white;">
+          <div>Saturday Morning Men’s Bible Study</div>
+          <div>Menlo Church – Menlo Park</div>
+          <div>Saturdays at 8:00 AM</div>
+          <div>General inquiries: <a href="mailto:saturdaymensbiblestudy@gmail.com">saturdaymensbiblestudy@gmail.com</a></div>
+          <div>Prayer requests: <a href="mailto:saturdaymensbiblestudy@gmail.com">saturdaymensbiblestudy@gmail.com</a></div>
+        </div>
+      </div>
+      <form class="form-card" action="mailto:saturdaymensbiblestudy@gmail.com" method="post" enctype="text/plain">
+        <div class="form-row">
+          <input name="name" placeholder="Name" />
+          <input name="email" placeholder="Email" />
+        </div>
+        <input name="subject" placeholder="Subject" />
+        <textarea name="message" placeholder="Message"></textarea>
+        <button class="btn btn-primary" type="submit">Email Message</button>
+        <div class="help-text">This button opens your email app and sends your message to <a href="mailto:saturdaymensbiblestudy@gmail.com">saturdaymensbiblestudy@gmail.com</a>.</div>
+      </form>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>
+        <div class="footer-title">Saturday Morning Men’s Bible Study</div>
+        <div class="footer-copy">Menlo Church • Menlo Park • Saturdays at 8:00 AM</div>
+      </div>
+      <div class="footer-tag">Faith • Wisdom • Fellowship</div>
+    </div>
+  </footer>
+</body>
+</html>
